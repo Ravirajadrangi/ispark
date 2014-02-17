@@ -1,2 +1,7 @@
 *~
 *.swp
+/*.log
+/*.db
+/target
+/project/target
+/project/project
