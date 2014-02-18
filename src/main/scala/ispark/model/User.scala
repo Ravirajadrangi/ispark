@@ -1,4 +1,4 @@
-package code
+package ispark
 package model
 
 import net.liftweb.mapper._

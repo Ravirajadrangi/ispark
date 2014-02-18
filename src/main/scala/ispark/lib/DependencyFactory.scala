@@ -1,4 +1,4 @@
-package code
+package ispark
 package lib
 
 import net.liftweb._

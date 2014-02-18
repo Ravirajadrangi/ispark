@@ -1,4 +1,4 @@
-package code 
+package ispark 
 package snippet 
 
 import scala.xml.{NodeSeq, Text}
