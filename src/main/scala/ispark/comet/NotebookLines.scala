@@ -27,15 +27,16 @@ class NotebookLines extends CometActor with CometListener {
    * representing the codeChunk's index in our master vector, and the "codeChunk" textarea
    * itself with the body of the code chunk.
    *
-   * The codeChunk textarea should be resized to hold the text.
+   * The height of the codeChunk textarea should be resized to hold the text.
    */
   def render = {
     ".notebookBox" #> (codeChunks.zipWithIndex.map({case (chunk, id) => 
         (".codeLabel *" #> ("In [" + id.toString + "]: ")
       & ".codeChunk *" #> chunk
-      & ".codeChunk [id]" #> ("codeChunk_ " + id.toString)
+      & ".codeChunk [id]" #> ("codeChunk_" + id.toString)
       & ".codeChunk [cols]" #> "40"
       & ".codeChunk [rows]" #> chunk.split("\n").size
+      & ".codeChunk [onkeyup]" #> ("resizeTextArea('codeChunk_" + id.toString + "')")
     )}))
   }
 
