@@ -1,0 +1,17 @@
+
+
+* Update server & client to print output results in between the input boxes.
+* Update the server's copy of a textbox in its 'onblur' event.
+* Locally track which textbox id number we're in using its 'onfocus' event.
+* Provide a 'run' button that:
+  * updates the server's copy of the textbox most recently onblur'd.
+  * actually run the code.
+  * update the client's copy of the output.
+
+* connect to the actual spark system
+* fork the spark system out to a separate process.
+* save and restore notebooks.
+
+* shift-enter should run the current text box
+* add a button / menu item to add a new text area after the current one.
+* if it's the last textbox, add a new one.
