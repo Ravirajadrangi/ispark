@@ -10,7 +10,7 @@ import actor._
  */
 object NotebookSession extends LiftActor with ListenerManager {
   /** Each codeChunk represents one input code chunk. */
-  private var codeChunks: Vector[String] = Vector("Type some scala...", "It's good for you.")
+  private var codeChunks: Vector[String] = Vector("val x=4\nval y=5", "print x")
 
   /** An "update" to send to listeners (NotebookLines instances) are the chunks of code. */
   def createUpdate = codeChunks

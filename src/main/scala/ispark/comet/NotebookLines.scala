@@ -23,18 +23,19 @@ class NotebookLines extends CometActor with CometListener {
   }
 
   /**
-   * Replace the body of each 'codeChunkText'-classed element within a 'codeChunk'-classed elem
-   * with the associated codeChunk and a prefix consisting of "[n]: ", its index in the vector.
+   * For each "notebookBox" div element, replace its internal "codeLabel" div with a number
+   * representing the codeChunk's index in our master vector, and the "codeChunk" textarea
+   * itself with the body of the code chunk.
    *
-   * Set the id of each codeChunkText to codeChunkText_n, and its double-click behavior
-   * is to turn it into a textarea for the user's modification.
+   * The codeChunk textarea should be resized to hold the text.
    */
   def render = {
     ".notebookBox" #> (codeChunks.zipWithIndex.map({case (chunk, id) => 
         (".codeLabel *" #> ("In [" + id.toString + "]: ")
       & ".codeChunk *" #> chunk
-      & ".codeChunk [ondblclick]" #> ("enableInnerEdit('codeChunkText_" + id.toString + "')")
-      & ".codeChunk [id]" #> ("codeChunkText_" + id.toString)
+      & ".codeChunk [id]" #> ("codeChunk_ " + id.toString)
+      & ".codeChunk [cols]" #> "40"
+      & ".codeChunk [rows]" #> chunk.split("\n").size
     )}))
   }
 

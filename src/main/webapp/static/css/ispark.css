@@ -12,8 +12,15 @@
   font-family: monospace;
   float: left;
   margin-right: 10px;
+  width: 80;
 }
 
 .codeChunk {
-  font-family: monospace;
+  width: 90%;
+  height: auto;
+
+  background-color: #eeeeee;
+  border: solid;
+  border-width: 1px;
+  border-color: #cccccc;
 }
