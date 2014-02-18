@@ -1,9 +1,19 @@
 
-.codeChunk {
+.notebookBox {
   background-color: #eeeeee;
   border: solid;
   border-width: 1px;
   border-color: black;
   padding: 2px;
   margin: 10px;
+}
+
+.codeLabel {
+  font-family: monospace;
+  float: left;
+  margin-right: 10px;
+}
+
+.codeChunk {
+  font-family: monospace;
 }

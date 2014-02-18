@@ -30,10 +30,11 @@ class NotebookLines extends CometActor with CometListener {
    * is to turn it into a textarea for the user's modification.
    */
   def render = {
-    ".codeChunk" #> (codeChunks.zipWithIndex.map({case (chunk, id) => 
-        (".codeChunkText *" #> ("[" + id.toString + "]: " + chunk)
-      & ".codeChunkText [ondblclick]" #> ("enableInnerEdit('codeChunkText_" + id.toString + "')")
-      & ".codeChunkText [id]" #> ("codeChunkText_" + id.toString)
+    ".notebookBox" #> (codeChunks.zipWithIndex.map({case (chunk, id) => 
+        (".codeLabel *" #> ("In [" + id.toString + "]: ")
+      & ".codeChunk *" #> chunk
+      & ".codeChunk [ondblclick]" #> ("enableInnerEdit('codeChunkText_" + id.toString + "')")
+      & ".codeChunk [id]" #> ("codeChunkText_" + id.toString)
     )}))
   }
 
