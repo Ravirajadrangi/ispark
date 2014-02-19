@@ -1,6 +1,6 @@
-name := "Lift 2.6 starter template"
+name := "iSpark"
 
-version := "0.0.3"
+version := "0.1.0"
 
 organization := "net.liftweb"
 
@@ -27,7 +27,9 @@ libraryDependencies ++= {
     "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "container,test" artifacts Artifact("javax.servlet", "jar", "jar"),
     "ch.qos.logback"    % "logback-classic"     % "1.0.6",
     "org.specs2"        %% "specs2"             % "1.14"             % "test",
-    "com.h2database"    % "h2"                  % "1.3.167"
+    "com.h2database"    % "h2"                  % "1.3.167",
+    "org.apache.spark"  %% "spark-core"         % "0.9.0-incubating" % "compile",
+    "org.apache.spark"  %% "spark-repl"         % "0.9.0-incubating" % "compile"
   )
 }
 

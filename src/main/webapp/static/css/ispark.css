@@ -16,6 +16,8 @@
 }
 
 .codeChunk {
+  font-family: monospace;
+
   width: 90%;
   height: auto;
 
