@@ -24,3 +24,17 @@
   border-width: 1px;
   border-color: #cccccc;
 }
+
+.responseChunk {
+  font-family: monospace;
+
+  background-color: #eeeeee;
+  border: solid;
+  border-width: 1px;
+  border-color: #cccccc;
+
+  padding: 2px;
+  padding-left: 4px;
+
+  min-height: 24px; /* At minimum, show "one line" of output even if empty. 20px + 4 padding */
+}

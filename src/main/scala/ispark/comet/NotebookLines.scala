@@ -12,14 +12,24 @@ class NotebookLines extends CometActor with CometListener {
   /** Each 'codeChunk' represents one box element to add to the page. */
   private var codeChunks: Vector[String] = Vector()
 
+  /**
+   * Each 'responseChunk' represents one stdout response that goes under a codeChunk.
+   * There should be the same number of codeChunks and responseChunks.
+   */
+  private var responseChunks: Vector[String] = Vector()
+
   def registerWith = NotebookSession
 
   /**
-   * When receiving a new list of code chunks from the NotebookSession, update our state and
-   * re-render.
+   * When receiving a new list of code chunks and corresponding responses
+   * from the NotebookSession, update our state and re-render.
    */
   override def lowPriority = {
-    case v: Vector[String] => codeChunks = v; reRender()
+    case (newCodes: Vector[String], newResponses: Vector[String]) => {
+      codeChunks = newCodes
+      responseChunks = newResponses
+      reRender()
+    }
   }
 
   /**
@@ -27,16 +37,21 @@ class NotebookLines extends CometActor with CometListener {
    * representing the codeChunk's index in our master vector, and the "codeChunk" textarea
    * itself with the body of the code chunk.
    *
+   * The "responseChunk" div below it should be accordingly set to the appropriate 'response'
+   * object.
+   *
    * The height of the codeChunk textarea should be resized to hold the text.
    */
   def render = {
-    ".notebookBox" #> (codeChunks.zipWithIndex.map({case (chunk, id) => 
-        (".codeLabel *" #> ("In [" + id.toString + "]: ")
-      & ".codeChunk *" #> chunk
-      & ".codeChunk [id]" #> ("codeChunk_" + id.toString)
-      & ".codeChunk [cols]" #> "40"
-      & ".codeChunk [rows]" #> chunk.split("\n").size
-      & ".codeChunk [onkeyup]" #> ("resizeTextArea('codeChunk_" + id.toString + "')")
+    ".notebookBox" #> (codeChunks.zip(responseChunks).zipWithIndex.map({
+        case ((code, response), id) => 
+            (".codeLabel *" #> ("In [" + id.toString + "]: ")
+          & ".codeChunk *" #> code
+          & ".codeChunk [id]" #> ("codeChunk_" + id.toString)
+          & ".codeChunk [cols]" #> "40"
+          & ".codeChunk [rows]" #> code.split("\n").size
+          & ".codeChunk [onkeyup]" #> ("resizeTextArea('codeChunk_" + id.toString + "')")
+          & ".responseChunk *" #> response
     )}))
   }
 
