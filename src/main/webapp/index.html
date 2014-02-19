@@ -22,8 +22,9 @@
 
       <div>
         <form class="lift:form.ajax">
-          <input class="lift:SendCode" id="new_code"/>
-          <input type="submit" value="Send code"/>
+          <textarea class="lift:SendCode codeChunk" id="new_code"
+            onkeyup="resizeTextArea('new_code')" rows="1" cols="80"></textarea>
+          <br/><input type="submit" value="Send code"/>
         </form>
       </div>
 
