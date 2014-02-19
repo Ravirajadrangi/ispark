@@ -17,6 +17,9 @@ unmanagedResourceDirectories in Test <+= (baseDirectory) { _ / "src/main/webapp"
 
 scalacOptions ++= Seq("-deprecation", "-unchecked")
 
+
+com.twitter.scrooge.ScroogeSBT.newSettings
+
 libraryDependencies ++= {
   val liftVersion = "2.6-M2"
   Seq(
@@ -29,7 +32,10 @@ libraryDependencies ++= {
     "org.specs2"        %% "specs2"             % "1.14"             % "test",
     "com.h2database"    % "h2"                  % "1.3.167",
     "org.apache.spark"  %% "spark-core"         % "0.9.0-incubating" % "compile",
-    "org.apache.spark"  %% "spark-repl"         % "0.9.0-incubating" % "compile"
+    "org.apache.spark"  %% "spark-repl"         % "0.9.0-incubating" % "compile",
+    "org.apache.thrift" % "libthrift" % "0.8.0",
+    "com.twitter" %% "scrooge-core" % "3.9.2",
+    "com.twitter" %% "finagle-thrift" % "6.5.0"
   )
 }
 
