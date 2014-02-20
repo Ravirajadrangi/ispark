@@ -1,6 +1,4 @@
 
-* break the project up into multiple modules: web, kernel, and core
-
 * fork the spark system out to a separate process.
   ... even though we try to evaluate things, the current world doesn't work because:
 

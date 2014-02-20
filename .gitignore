@@ -3,5 +3,6 @@
 /*.log
 /*.db
 /target
+*/target
 /project/target
 /project/project
