@@ -10,7 +10,7 @@ object ISparkBuild extends Build {
 
   lazy val core = Project(id = "ispark-core",
                          base = file("core"),
-                         settings = sharedSettings)
+                         settings = coreSettings)
 
   lazy val kernel = Project(id = "ispark-kernel",
                          base = file("kernel"),
@@ -19,12 +19,11 @@ object ISparkBuild extends Build {
   lazy val web = Project(id = "ispark-web",
                          base = file("web"),
                          settings = webSettings) dependsOn(core) dependsOn(kernel)
+
   // TODO: web shouldn't directly depend on kernel, it should just know where to
   // find an installation of it (i.e., via a conf var) to execute.
 
-
-
-  def sharedSettings: Seq[sbt.Project.Setting[_]] = Defaults.defaultSettings ++ Seq(
+  def sharedSettings = Defaults.defaultSettings ++ Seq(
     version := "0.1.0",
     organization := "io.magnify",
     scalaVersion := "2.10.3",
@@ -45,7 +44,21 @@ object ISparkBuild extends Build {
     libraryDependencies ++= {
       Seq(
         "org.apache.spark"  %% "spark-core"         % "0.9.0-incubating" % "compile",
-        "org.apache.spark"  %% "spark-repl"         % "0.9.0-incubating" % "compile",
+        "org.apache.spark"  %% "spark-repl"         % "0.9.0-incubating" % "compile"
+      )
+    }
+  )
+
+  def rootSettings = sharedSettings ++ Seq(
+    publish := {}
+  )
+
+  def coreSettings = sharedSettings ++ Seq(
+    // Add thrift dependencies to the core lib,
+    // as well as the Scrooge (Scala thrift compiler) configuration.
+
+    libraryDependencies ++= {
+      Seq(
         "org.apache.thrift" % "libthrift" % "0.8.0",
         "com.twitter" %% "scrooge-core" % "3.9.2",
         "com.twitter" %% "finagle-thrift" % "6.5.0"
@@ -53,11 +66,8 @@ object ISparkBuild extends Build {
     }
   ) ++ com.twitter.scrooge.ScroogeSBT.newSettings
 
-  def rootSettings = sharedSettings ++ Seq(
-    publish := {}
-  )
-
-  def webSettings: Seq[sbt.Project.Setting[_]] = sharedSettings ++ Seq(
+  def webSettings = sharedSettings ++ Seq(
+    // Add web-app-specific settings for using lift.
 
     unmanagedResourceDirectories in Test <+= (baseDirectory) { _ / "src/main/webapp" },
 
