@@ -11,3 +11,4 @@ Compiling and Running
     > container:start
 
 
+Point your web browser at http://localhost:8080
