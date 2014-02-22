@@ -73,6 +73,8 @@ class SparkEvalClient {
   val client = new ISparkKernel$FinagleClient(service, new TBinaryProtocol.Factory())
 
   def eval(code: String): String = {
+    // TODO: Instead of blocking on the 'get' here, we should really just return the Future
+    // and let that update the client at its own pace.
     client.evaluateCode(EvalRequest(code)).get match {
       case EvalResult(resultText: String) => { return resultText}
     }
