@@ -1,4 +1,6 @@
 
+* shut down the IPC server and kill the subprocess on container:stop
+
 * Update the server's copy of a textbox in its 'onblur' event.
 * Locally track which textbox id number we're in using its 'onfocus' event.
 * Provide a 'run' button that:
