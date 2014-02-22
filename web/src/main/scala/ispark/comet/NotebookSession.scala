@@ -5,14 +5,14 @@ import net.liftweb._
 import http._
 import actor._
 
-import ispark.exec.SparkEvaluator
+import ispark.exec.SparkEvalClient
 
 /**
  * Holds all state for one session of an open notebook.
  */
 object NotebookSession extends LiftActor with ListenerManager {
-  /** The object that evaluates scala/spark code */
-  private val evaluator: SparkEvaluator = new SparkEvaluator
+  /** IPC connection object to the kernel that evaluates scala/spark code */
+  private val evaluator: SparkEvalClient = new SparkEvalClient
 
   /** Each codeChunk represents one input code chunk. */
   private var codeChunks: Vector[String] = Vector("val x=4\nval y=5")
@@ -26,7 +26,7 @@ object NotebookSession extends LiftActor with ListenerManager {
   override def lowPriority = {
     case codeChunk: String => {
       codeChunks :+= codeChunk
-      responseChunks :+= evaluator.evaluate(codeChunk) /* Evaluate the new code. */
+      responseChunks :+= evaluator.eval(codeChunk) /* Evaluate the new code. */
       updateListeners()
     }
   }

@@ -1,17 +1,4 @@
 
-* fork the spark system out to a separate process.
-  ... even though we try to evaluate things, the current world doesn't work because:
-
-Failed to initialize compiler: object scala.annotation.Annotation in compiler mirror not found.
-** Note that as of 2.8 scala does not assume use of the java classpath.
-** For the old behavior pass -usejavacp to scala, or if using a Settings
-** object programatically, settings.usejavacp.value = true.
-
-See http://stackoverflow.com/questions/16920884/custom-scala-repl-issues
-... tl;dr: we have to fork, we can't run the repl inside SBT.
-
-Use thrift for an IPC server; compile to scala with https://github.com/twitter/scrooge
-
 * Update the server's copy of a textbox in its 'onblur' event.
 * Locally track which textbox id number we're in using its 'onfocus' event.
 * Provide a 'run' button that:
@@ -24,3 +11,5 @@ Use thrift for an IPC server; compile to scala with https://github.com/twitter/s
 * shift-enter should run the current text box
 * add a button / menu item to add a new text area after the current one.
 * if it's the last textbox, add a new one.
+
+* stdout / stderr associated with the kernel process should be re-routed back to the notebook.
