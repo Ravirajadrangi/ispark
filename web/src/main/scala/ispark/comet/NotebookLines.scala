@@ -51,7 +51,7 @@ class NotebookLines extends CometActor with CometListener {
           & ".codeChunk [cols]" #> "40"
           & ".codeChunk [rows]" #> code.split("\n").size
           & ".codeChunk [onkeyup]" #> ("resizeTextArea('codeChunk_" + id.toString + "')")
-          & ".responseChunk *" #> response
+          & ".responseChunk *" #> <pre>{response}</pre>
     )}))
   }
 
